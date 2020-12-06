@@ -114,7 +114,9 @@ exports.onPrintTaskRequested = function (event) {
         task.options.duplex = Printing.PrintDuplex.oneSided;
     }
 
-    task.options.numberOfCopies = config.copies || 1;
+    if (config.copies) {
+        task.options.numberOfCopies = config.copies || 1;
+    }
 
     task.oncompleted = function (e) {
         exports._func(e.detail[0].completion == 3);
